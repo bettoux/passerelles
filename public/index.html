@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passerelle - Sports & Culture Bridge</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Inter font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        /* Define custom color variables based on user request */
+        :root {
+            --color-primary: #5A12B0; /* Purple */
+            --color-accent: #FFC400; /* Yellow Accent */
+            --color-bg-dark: #1A1A1A; /* Near Black Base */
+            --color-bg-card: #2A2A2A; /* Dark Gray for Card Depth */
+            --color-text-light: #F3F4F6; /* Near White Text */
+        }
+
+        /* Configure Tailwind to use custom colors */
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: 'var(--color-primary)',
+                        accent: 'var(--color-accent)',
+                        'bg-dark': 'var(--color-bg-dark)',
+                        'bg-card': 'var(--color-bg-card)',
+                        'text-light': 'var(--color-text-light)',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+
+        body {
+            background-color: var(--color-bg-dark);
+            color: var(--color-text-light); 
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Hero CTA Animation (Kept for button engagement) */
+        .cta-glow {
+            box-shadow: 0 0 15px var(--color-accent), 0 0 30px rgba(255, 196, 0, 0.5);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .cta-glow:hover {
+            box-shadow: 0 0 25px var(--color-accent), 0 0 60px rgba(255, 196, 0, 0.9);
+            transform: scale(1.03);
+        }
+        
+        /* ------------------------------------------------ */
+        /* PILLAR LAYOUT (Standard Grid, No Scroll) */
+        /* ------------------------------------------------ */
+        #pillars-container {
+            display: grid;
+            grid-template-columns: 1fr; /* Stack on mobile */
+            gap: 2rem; /* Consistent spacing */
+            justify-content: center;
+        }
+        
+        @media (min-width: 1024px) {
+            #pillars-container {
+                grid-template-columns: repeat(3, 1fr); /* 3 column grid on desktop */
+                gap: 2rem;
+            }
+            
+            .pillar-card {
+                margin-left: 0; 
+            }
+            
+            /* Hover effect (kept for visual engagement) */
+            .pillar-card:hover {
+                transform: translateY(-10px) scale(1.02);
+                border-color: var(--color-accent);
+                z-index: 20;
+            }
+        }
+        
+        /* Card Styling */
+        .pillar-card {
+            background-color: var(--color-bg-card);
+            border-bottom: 4px solid var(--color-primary);
+            transition: all 0.5s ease-in-out;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            z-index: 1; /* Ensure cards are above any background effects */
+        }
+        .pillar-card:hover {
+            border-bottom-color: var(--color-accent);
+        }
+        
+        /* MISSION SECTION VIDEO BACKGROUND */
+        #mission {
+            position: relative;
+            overflow: hidden;
+        }
+
+        #mission-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: 0;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            opacity: 0.1; /* Subtle overlay */
+        }
+
+        #mission-content {
+            position: relative;
+            z-index: 1; /* Ensure content is above the video */
+        }
+        
+        /* Apple-inspired Separator */
+        .pillar-separator {
+            width: 80%;
+            max-width: 960px;
+            height: 1px;
+            background-color: var(--color-bg-card);
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body id="app">
+
+    <!-- 
+        ================================================================
+        HEADER & NAVIGATION (High-Contrast, Dark Mode)
+        ================================================================
+    -->
+    <header class="sticky top-0 z-50 bg-bg-dark/95 backdrop-blur-sm shadow-xl border-b border-primary/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <a href="#hero" class="text-3xl font-extrabold text-white transition duration-300 hover:text-accent">
+                <span class="text-accent">P</span>asserelle
+            </a>
+            <div class="flex items-center space-x-4">
+                <nav class="hidden md:flex space-x-6">
+                    <a href="#mission" class="nav-link text-lg font-medium text-text-light hover:text-primary transition duration-300 rounded-lg p-2" data-lang-key="nav_mission">MISSION</a>
+                    <a href="#pillars" class="nav-link text-lg font-medium text-text-light hover:text-primary transition duration-300 rounded-lg p-2" data-lang-key="nav_pillars">PILLARS</a>
+                    <a href="#contact" class="nav-link text-lg font-medium text-text-light hover:text-primary transition duration-300 rounded-lg p-2" data-lang-key="nav_contact">CONTACT</a>
+                </nav>
+                <!-- Language Toggle -->
+                <button id="lang-toggle" class="bg-primary text-white px-3 py-1.5 rounded-full font-bold text-sm hover:bg-accent hover:text-bg-dark transition duration-300">FR</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- 
+            ================================================================
+            HERO SECTION (STATIC)
+            ================================================================
+        -->
+        <section id="hero" class="relative overflow-hidden pt-32 pb-40 lg:min-h-screen bg-bg-dark flex items-center border-b border-gray-800">
+            <!-- Animation removed -->
+
+            <div id="hero-content" class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center w-full">
+                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight mb-6 leading-tight">
+                    <span class="block text-white" data-lang-key="hero_headline_1">Bridging the Future.</span>
+                    <!-- HOVER EFFECT REMAINING REMOVED -->
+                    <span class="block text-accent transition duration-500" data-lang-key="hero_headline_2">Sports Power. Creative Vision.</span>
+                </h1>
+                <p class="mt-8 max-w-3xl mx-auto text-xl text-gray-400 mb-12" data-lang-key="hero_subtext">
+                    Passerelle is the ultimate catalyst for high-value synergy, connecting cultural institutions and athletic excellence to forge powerful, unprecedented partnerships.
+                </p>
+                <a href="#pillars" class="inline-block px-12 py-4 text-xl font-bold rounded-full bg-accent text-bg-dark uppercase cta-glow" data-lang-key="hero_cta">
+                    Discover Our 3 Pillars
+                </a>
+            </div>
+        </section>
+
+        <!-- 
+            ================================================================
+            MISSION SECTION (Dark Base) - With Video Background
+            ================================================================
+        -->
+        <section id="mission" class="py-24 md:py-32 bg-bg-dark border-b border-gray-800">
+            
+            <!-- Video Background Element -->
+            <video id="mission-video" autoplay loop muted playsinline>
+                <!-- NOTE: Using a placeholder video loop for demonstration. REPLACE THIS SRC with your actual video. -->
+                <source src="https://assets.mixkit.co/videos/preview/mixkit-abstract-dark-particles-2041-small.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+
+            <div id="mission-content" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+                    <!-- Left Side: Tag and Title -->
+                    <div>
+                        <h2 class="text-base font-semibold uppercase tracking-wider text-accent mb-3" data-lang-key="mission_tag">OUR PURPOSE</h2>
+                        <h3 class="text-4xl sm:text-5xl font-extrabold text-white leading-tight border-l-4 border-primary pl-4">
+                            <span data-lang-key="mission_title">The Intersection is Where Value is Created.</span>
+                        </h3>
+                    </div>
+                    <!-- Right Side: Paragraphs -->
+                    <div class="text-lg space-y-8 text-gray-400">
+                        <p data-lang-key="mission_p1">
+                            In a world where sports and culture often operate in parallel, Passerelle steps in as the essential bridge. We break down the traditional silos that limit growth, fostering an ecosystem where the discipline of elite athleticism inspires revolutionary artistic expression, and where cultural depth enriches the athlete's professional journey.
+                        </p>
+                        <p data-lang-key="mission_p2" class="font-bold text-text-light border-t border-primary/50 pt-8">
+                            Our mission is to unlock new audience engagement, create innovative revenue streams, and cultivate sustainable professional development by deliberately connecting these two powerful forces.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 
+            ================================================================
+            PILLARS SECTION (STANDARD GRID LAYOUT - NEW ICONS)
+            ================================================================
+        -->
+        <section id="pillars" class="py-24 md:py-32 bg-bg-dark">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+                <h2 class="text-center text-4xl sm:text-5xl font-extrabold text-white" data-lang-key="pillars_title">
+                    The 3 Pillars of Synergy
+                </h2>
+                <p class="text-center text-lg mt-4 text-gray-500" data-lang-key="pillars_flow_hint">
+                    (Scroll down for deep dives into each section.)
+                </p>
+            </div>
+
+            <!-- Standard Grid Container -->
+            <div id="pillars-container" class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8 px-4 sm:px-6 lg:px-8">
+
+                <!-- Pillar 1: AWARENESS - ICON: 🔗 (Link/Connection) -->
+                <a href="#awareness-detail" class="pillar-card p-8 rounded-2xl border-2 border-primary/20 hover:border-accent transition-all duration-500" data-pillar-id="1">
+                    <div class="text-6xl text-accent mb-6 transition duration-500 hover:rotate-6">🔗</div>
+                    <h4 class="text-2xl font-bold text-primary mb-4" data-lang-key="pillar_1_title">Awareness / Sensibilisation</h4>
+                    <p class="text-gray-400" data-lang-key="pillar_1_text">
+                        We cultivate a deep, mutual understanding between both spheres. This involves workshops, education, and strategic communication to highlight shared objectives and the necessity of collaboration for mutual growth.
+                    </p>
+                </a>
+
+                <!-- Pillar 2: PRODUCTION - ICON: 📐 (Drafting/Creation) -->
+                <a href="#production-detail" class="pillar-card p-8 rounded-2xl border-2 border-primary/20 hover:border-accent transition-all duration-500" data-pillar-id="2">
+                    <div class="text-6xl text-accent mb-6 transition duration-500 hover:scale-110">📐</div>
+                    <h4 class="text-2xl font-bold text-primary mb-4" data-lang-key="pillar_2_title">Production</h4>
+                    <p class="text-gray-400" data-lang-key="pillar_2_text">
+                        We generate high-impact, collaborative content and experiences. This ranges from multimedia production (podcasts, articles) to unique events, exhibitions, and co-created cultural and athletic assets.
+                    </p>
+                </a>
+
+                <!-- Pillar 3: BROKERAGE - ICON: 📈 (Growth/Metrics) -->
+                <a href="#brokerage-detail" class="pillar-card p-8 rounded-2xl border-2 border-primary/20 hover:border-accent transition-all duration-500" data-pillar-id="3">
+                    <div class="text-6xl text-accent mb-6 transition duration-500 hover:translate-x-1">📈</div>
+                    <h4 class="text-2xl font-bold text-primary mb-4" data-lang-key="pillar_3_title">Brokerage / Courtage</h4>
+                    <p class="text-gray-400" data-lang-key="pillar_3_text">
+                        We act as the ultimate catalyst and matchmaker, securing strategic, high-value partnerships between artists, leagues, athletes, and cultural institutions to generate real-world projects and returns.
+                    </p>
+                </a>
+            </div>
+        </section>
+        
+        <!-- 
+            ================================================================
+            PILLAR DETAIL 1: AWARENESS (Apple Style)
+            ================================================================
+        -->
+        <section id="awareness-detail" class="py-32 bg-bg-dark border-t border-gray-800">
+            <div class="pillar-separator my-16"></div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+                <!-- Visual / Number Element (Right side on desktop) -->
+                <div class="order-2 lg:order-1 text-center lg:text-left">
+                    <h4 class="text-9xl font-extrabold text-primary opacity-20 transition duration-500 hover:opacity-50">01</h4>
+                </div>
+                <!-- Content (Left side on desktop) -->
+                <div class="order-1 lg:order-2 text-text-light space-y-6">
+                    <p class="text-lg uppercase tracking-widest text-accent font-semibold" data-lang-key="detail_1_tag">The Foundation</p>
+                    <h2 class="text-5xl font-bold text-white mb-6 leading-tight" data-lang-key="detail_1_title">Mutual Understanding for Maximum Impact.</h2>
+                    <p class="text-xl text-gray-400" data-lang-key="detail_1_p1">
+                        Before any collaboration can be successful, both the athletic and cultural partners must speak the same language. We facilitate intensive, custom workshops focused on translating brand objectives, understanding operational tempos, and identifying cultural overlaps.
+                    </p>
+                    <p class="text-xl text-gray-400 font-medium" data-lang-key="detail_1_p2">
+                        This crucial groundwork ensures that every subsequent project is built on shared vision and respect, leading to durable and deeply resonant outcomes, not just temporary promotional stunts.
+                    </p>
+                </div>
+            </div>
+            <div class="pillar-separator my-16"></div>
+        </section>
+
+        <!-- 
+            ================================================================
+            PILLAR DETAIL 2: PRODUCTION (Apple Style)
+            ================================================================
+        -->
+        <section id="production-detail" class="py-32 bg-bg-dark">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+                <!-- Content (Left side on desktop) -->
+                <div class="order-1 text-text-light space-y-6">
+                    <p class="text-lg uppercase tracking-widest text-accent font-semibold" data-lang-key="detail_2_tag">The Catalyst</p>
+                    <h2 class="text-5xl font-bold text-white mb-6 leading-tight" data-lang-key="detail_2_title">Creating Assets That Define the Conversation.</h2>
+                    <p class="text-xl text-gray-400" data-lang-key="detail_2_p1">
+                        Production is where raw potential is transformed into tangible value. This pillar covers co-created documentary series, exclusive limited-edition merchandise that blends art and sport iconography, and interactive digital experiences.
+                    </p>
+                    <p class="text-xl text-gray-400 font-medium" data-lang-key="detail_2_p2">
+                        Our focus is on authentic, high-fidelity content that engages new demographics and re-energizes existing fan bases by offering unique perspectives on performance and creativity.
+                    </p>
+                </div>
+                <!-- Visual / Number Element (Right side on desktop) -->
+                <div class="order-2 text-center lg:text-right">
+                    <h4 class="text-9xl font-extrabold text-primary opacity-20 transition duration-500 hover:opacity-50">02</h4>
+                </div>
+            </div>
+            <div class="pillar-separator my-16"></div>
+        </section>
+        
+        <!-- 
+            ================================================================
+            PILLAR DETAIL 3: BROKERAGE (Apple Style)
+            ================================================================
+        -->
+        <section id="brokerage-detail" class="py-32 bg-bg-dark border-b border-gray-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+                <!-- Visual / Number Element (Right side on desktop) -->
+                <div class="order-2 lg:order-1 text-center lg:text-left">
+                    <h4 class="text-9xl font-extrabold text-primary opacity-20 transition duration-500 hover:opacity-50">03</h4>
+                </div>
+                <!-- Content (Left side on desktop) -->
+                <div class="order-1 lg:order-2 text-text-light space-y-6">
+                    <p class="text-lg uppercase tracking-widest text-accent font-semibold" data-lang-key="detail_3_tag">The Execution</p>
+                    <h2 class="text-5xl font-bold text-white mb-6 leading-tight" data-lang-key="detail_3_title">Strategic Partnership and Value Exchange.</h2>
+                    <p class="text-xl text-gray-400" data-lang-key="detail_3_p1">
+                        Brokerage is the final, high-stakes step. We don't just connect entities; we structure deals that maximize visibility, financial return, and long-term brand equity for all parties involved. This includes sponsorship structuring and rights negotiation.
+                    </p>
+                    <p class="text-xl text-gray-400 font-medium" data-lang-key="detail_3_p2">
+                        By leveraging our deep network across elite sports leagues and globally renowned cultural institutions, we ensure that every partnership is strategically aligned with growth metrics and cultural legacy objectives.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 
+            ================================================================
+            CALL TO ACTION / CONTACT (Yellow/Dark Contrast)
+            ================================================================
+        -->
+        <section id="contact" class="py-20 md:py-28 bg-accent border-t border-bg-dark">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-4xl sm:text-5xl font-extrabold text-bg-dark mb-6" data-lang-key="contact_title">
+                    Ready to Build the Bridge?
+                </h2>
+                <p class="text-xl text-bg-dark mb-10" data-lang-key="contact_subtext">
+                    Whether you are an institution seeking innovative partnerships or an athlete looking to broaden your impact, Passerelle is your next move.
+                </p>
+                <a href="mailto:info@passerelle.com" class="inline-block px-12 py-4 text-xl font-bold rounded-full bg-primary text-white uppercase shadow-lg hover:shadow-xl transition duration-300" data-lang-key="contact_cta">
+                    Start a Conversation
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- 
+        ================================================================
+        FOOTER (Dark Purple)
+        ================================================================
+    -->
+    <footer class="bg-primary pt-12 pb-6 border-t border-accent/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-xl font-extrabold text-white mb-4">
+                <span class="text-accent">P</span>asserelle
+            </p>
+            <p class="text-gray-300 text-sm" data-lang-key="footer_copyright">
+                &copy; 2025 Passerelle. All Rights Reserved.
+            </p>
+        </div>
+    </footer>
+
+    <!-- 
+        ================================================================
+        JAVASCRIPT FOR BILINGUAL FUNCTIONALITY
+        ================================================================
+    -->
+    <script>
+        // --- 1. LANGUAGE CONTENT DEFINITION (Updated with Detail Sections) ---
+        const content = {
+            en: {
+                // Navigation
+                nav_mission: "MISSION",
+                nav_pillars: "PILLARS",
+                nav_contact: "CONTACT",
+
+                // Hero Section
+                hero_headline_1: "Bridging the Future.",
+                hero_headline_2: "Sports Power. Creative Vision.",
+                hero_subtext: "Passerelle is the ultimate catalyst for high-value synergy, connecting cultural institutions and athletic excellence to forge powerful, unprecedented partnerships.",
+                hero_cta: "Discover Our 3 Pillars",
+
+                // Mission Section
+                mission_tag: "OUR PURPOSE",
+                mission_title: "The Intersection is Where Value is Created.",
+                mission_p1: "In a world where sports and culture often operate in parallel, Passerelle steps in as the essential bridge. We break down the traditional silos that limit growth, fostering an ecosystem where the discipline of elite athleticism inspires revolutionary artistic expression, and where cultural depth enriches the athlete's professional journey.",
+                mission_p2: "Our mission is to unlock new audience engagement, create innovative revenue streams, and cultivate sustainable professional development by deliberately connecting these two powerful forces.",
+
+                // Pillars Section
+                pillars_title: "The 3 Pillars of Synergy",
+                pillars_flow_hint: "(Scroll down for deep dives into each section.)",
+                pillar_1_title: "Awareness / Sensibilisation",
+                pillar_1_text: "We cultivate a deep, mutual understanding between both spheres. This involves workshops, education, and strategic communication to highlight shared objectives and the necessity of collaboration for mutual growth.",
+                pillar_2_title: "Production",
+                pillar_2_text: "We generate high-impact, collaborative content and experiences. This ranges from multimedia production (podcasts, articles) to unique events, exhibitions, and co-created cultural and athletic assets.",
+                pillar_3_title: "Brokerage / Courtage",
+                pillar_3_text: "We act as the ultimate catalyst and matchmaker, securing strategic, high-value partnerships between artists, leagues, athletes, and cultural institutions to generate real-world projects and returns.",
+
+                // Detail Sections
+                detail_1_tag: "THE FOUNDATION",
+                detail_1_title: "Mutual Understanding for Maximum Impact.",
+                detail_1_p1: "Before any collaboration can be successful, both the athletic and cultural partners must speak the same language. We facilitate intensive, custom workshops focused on translating brand objectives, understanding operational tempos, and identifying cultural overlaps.",
+                detail_1_p2: "This crucial groundwork ensures that every subsequent project is built on shared vision and respect, leading to durable and deeply resonant outcomes, not just temporary promotional stunts.",
+
+                detail_2_tag: "THE CATALYST",
+                detail_2_title: "Creating Assets That Define the Conversation.",
+                detail_2_p1: "Production is where raw potential is transformed into tangible value. This pillar covers co-created documentary series, exclusive limited-edition merchandise that blends art and sport iconography, and interactive digital experiences.",
+                detail_2_p2: "Our focus is on authentic, high-fidelity content that engages new demographics and re-energizes existing fan bases by offering unique perspectives on performance and creativity.",
+
+                detail_3_tag: "THE EXECUTION",
+                detail_3_title: "Strategic Partnership and Value Exchange.",
+                detail_3_p1: "Brokerage is the final, high-stakes step. We don't just connect entities; we structure deals that maximize visibility, financial return, and long-term brand equity for all parties involved. This includes sponsorship structuring and rights negotiation.",
+                detail_3_p2: "By leveraging our deep network across elite sports leagues and globally renowned cultural institutions, we ensure that every partnership is strategically aligned with growth metrics and cultural legacy objectives.",
+                
+                // Contact Section
+                contact_title: "Ready to Build the Bridge?",
+                contact_subtext: "Whether you are an institution seeking innovative partnerships or an athlete looking to broaden your impact, Passerelle is your next move.",
+                contact_cta: "Start a Conversation",
+
+                // Footer
+                footer_copyright: "© 2025 Passerelle. All Rights Reserved.",
+            },
+            fr: {
+                // Navigation
+                nav_mission: "MISSION",
+                nav_pillars: "PILIERS",
+                nav_contact: "CONTACT",
+
+                // Hero Section
+                hero_headline_1: "Unir l'Avenir.",
+                hero_headline_2: "Force du Sport. Vision Créative.",
+                hero_subtext: "Passerelle est le catalyseur ultime de synergies à haute valeur ajoutée, reliant les institutions culturelles et l'excellence athlétique pour forger des partenariats puissants et sans précédent.",
+                hero_cta: "Découvrez Nos 3 Piliers",
+
+                // Mission Section
+                mission_tag: "NOTRE OBJECTIF",
+                mission_title: "L'Intersection Crée la Valeur.",
+                mission_p1: "Dans un monde où le sport et la culture opèrent souvent en parallèle, Passerelle intervient comme le pont essentiel. Nous faisons tomber les barrières traditionnelles qui limitent la croissance, favorisant un écosystème où la discipline de l'athlétisme inspire une expression artistique révolutionnaire, et où la profondeur culturelle enrichit le parcours professionnel de l'athlète.",
+                mission_p2: "Notre mission est de débloquer de nouveaux engagements d'audience, de créer des sources de revenus innovantes et de cultiver un développement professionnel durable en connectant délibérément ces deux forces puissantes.",
+                
+                // Pillars Section
+                pillars_title: "Les 3 Piliers de la Synergie",
+                pillars_flow_hint: "(Faites défiler pour explorer chaque section en détail.)",
+                pillar_1_title: "Awareness / Sensibilisation",
+                pillar_1_text: "Nous cultivons une compréhension mutuelle approfondie entre les deux sphères. Cela implique des ateliers, de la formation et une communication stratégique pour mettre en évidence les objectifs partagés et la nécessité de la collaboration pour une croissance mutuelle.",
+                pillar_2_title: "Production",
+                pillar_2_text: "Nous générons des contenus et des expériences collaboratifs à fort impact. Cela va de la production multimédia (podcasts, articles) à des événements uniques, des expositions et des actifs culturels et sportifs co-créés.",
+                pillar_3_title: "Brokerage / Courtage",
+                pillar_3_text: "Nous agissons comme le catalyseur et l'entremetteur ultime, sécurisant des partenariats stratégiques de grande valeur entre artistes, ligues, athlètes et institutions culturelles pour générer des projets et des rendements concrets.",
+
+                // Detail Sections
+                detail_1_tag: "LA FONDATION",
+                detail_1_title: "Compréhension Mutuelle pour un Impact Maximal.",
+                detail_1_p1: "Avant qu'une collaboration ne réussisse, les partenaires athlétiques et culturels doivent parler le même langage. Nous facilitons des ateliers intensifs et personnalisés axés sur la traduction des objectifs de marque, la compréhension des rythmes opérationnels et l'identification des chevauchements culturels.",
+                detail_1_p2: "Ce travail préparatoire crucial garantit que chaque projet ultérieur est bâti sur une vision et un respect partagés, menant à des résultats durables et profondément résonnants, et non à de simples cascades promotionnelles temporaires.",
+
+                detail_2_tag: "LE CATALYSEUR",
+                detail_2_title: "Créer des Actifs qui Définissent la Conversation.",
+                detail_2_p1: "La production est l'endroit où le potentiel brut est transformé en valeur tangible. Ce pilier couvre la cocréation de séries documentaires, de produits dérivés exclusifs en édition limitée mélangeant l'art et l'iconographie sportive, et d'expériences numériques interactives.",
+                detail_2_p2: "Notre focus est un contenu authentique et de haute fidélité qui engage de nouvelles données démographiques et redynamise les bases de fans existantes en offrant des perspectives uniques sur la performance et la créativité.",
+
+                detail_3_tag: "L'EXÉCUTION",
+                detail_3_title: "Partenariat Stratégique et Échange de Valeur.",
+                detail_3_p1: "Le courtage est l'étape finale et cruciale. Nous ne faisons que connecter des entités; nous structurons des accords qui maximisent la visibilité, le rendement financier et la valeur de la marque à long terme pour toutes les parties. Cela comprend la structuration des parrainages et la négociation des droits.",
+                detail_3_p2: "En tirant parti de notre réseau étendu à travers les ligues sportives d'élite et les institutions culturelles de renommée mondiale, nous veillons à ce que chaque partenariat soit stratégiquement aligné sur les indicateurs de croissance et les objectifs d'héritage culturel.",
+                
+                // Contact Section
+                contact_title: "Prêt à Bâtir le Pont ?",
+                contact_subtext: "Que vous soyez une institution à la recherche de partenariats innovants ou un athlète souhaitant élargir votre impact, Passerelle est votre prochaine étape.",
+                contact_cta: "Engagez la Conversation",
+
+                // Footer
+                footer_copyright: "© 2025 Passerelle. Tous droits réservés.",
+            }
+        };
+
+        let currentLang = 'en';
+        
+        // --- 2. CORE LANGUAGE TOGGLE FUNCTION ---
+        function updateContent(lang) {
+            currentLang = lang;
+            const textElements = document.querySelectorAll('[data-lang-key]');
+            
+            textElements.forEach(el => {
+                const key = el.getAttribute('data-lang-key');
+                if (content[lang] && content[lang][key]) {
+                    el.textContent = content[lang][key];
+                }
+            });
+
+            // Update language toggle button text
+            const langToggle = document.getElementById('lang-toggle');
+            if (langToggle) {
+                langToggle.textContent = lang === 'en' ? 'FR' : 'EN';
+                document.documentElement.lang = lang;
+            }
+        }
+        
+        // --- 3. INITIALIZATION ---
+        window.onload = function() {
+            // Set initial language (English default)
+            updateContent(currentLang); 
+            
+            // Set up language toggle listener
+            const langToggle = document.getElementById('lang-toggle');
+            if (langToggle) {
+                langToggle.addEventListener('click', () => {
+                    const newLang = currentLang === 'en' ? 'fr' : 'en';
+                    updateContent(newLang);
+                });
+            }
+        };
+    </script>
+</body>
+</html>
