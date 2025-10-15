@@ -10,10 +10,12 @@
             theme: {
                 extend: {
                     colors: {
-                        'primary-dark': '#001C3F', // Dark Blue (Deloitte-like Navy)
-                        'secondary-blue': '#183D7A', // Medium Blue
-                        'accent-green': '#8CC63F', // Accent Green
-                        'off-white': '#F7F7F7',
+                        // NEW BRAND COLORS: Dark Grey, Deep Purple, Mustard Yellow
+                        'primary-deep': '#31005A',      // Deep Purple (Accent 1)
+                        'accent-mustard': '#FFC82D',    // Mustard Yellow (Accent 2)
+                        'primary-dark-bg': '#0A0A0A',   // Deep Black (Updated Main Background)
+                        'text-light': '#F3F4F6',        // Off-White (Text on Dark BG)
+                        'subtle-gray': '#D1D5DB',       // Light Gray for subtle details on Dark BG
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -46,21 +48,37 @@
             transform: translateY(0);
         }
 
-        /* Hero text styling for impact */
+        /* Hero text styling for creative impact */
         #hero-text {
             line-height: 1.1;
+            /* Lighter shadow on dark background */
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.8); 
         }
-        /* Gradient for the pillar section */
-        #pillars-bg {
-            background: linear-gradient(180deg, #F7F7F7 0%, #EFEFEF 100%);
+       
+        /* Styling for the Pillar Cards for a livelier feel */
+        .pillar-card {
+            transition: all 0.3s ease;
+            /* Stronger initial shadow - for white cards on dark background */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.15);
+        }
+        .pillar-card:hover {
+            transform: translateY(-8px); /* Deeper lift */
+            /* Mustard Yellow border/glow on hover */
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4), 0 0 0 4px #FFC82D; 
+        }
+
+        /* Parallax Layer CSS */
+        #parallax-layer {
+            transition: transform 0.1s linear; /* Smooth movement when scrolling */
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
 </head>
 
-<body class="font-sans text-primary-dark">
+<!-- Body uses Deep Black background and Off-White text by default -->
+<body class="font-sans text-text-light bg-primary-dark-bg">
 
-    <!-- Content Data Store -->
+    <!-- Content Data Store - Language logic remains the same -->
     <script>
         const content = {
             en: {
@@ -68,72 +86,103 @@
                 navHome: "Home",
                 navPillars: "Pillars",
                 navContact: "Contact",
-                navCTA: "Start a conversation",
+                navCTA: "Let's Talk Possibilities",
                 langToggle: "FR",
 
-                heroSlogan: "The Intersection is Where Value is Created.",
-                heroSubtext: "Building bridges between Art and Sport.",
+                heroSlogan: "Where Creativity Meets Competition.",
+                heroSubtext: "Unleashing the full potential of Art and Sport.",
 
-                visionTitle: "Our Mission",
-                visionBody: "Our mission is to unlock new audience engagement, create innovative revenue streams, and cultivate sustainable professional development by deliberately connecting these two powerful forces.",
+                visionTitle: "Why We Exist",
+                visionBody: "We're here to spark **unforgettable collaboration**. We unlock fresh audience engagement, build powerful new revenue streams, and cultivate sustainable careers by bringing the deliberate beauty of Art and the raw energy of Sport together.",
 
-                pillarTitle: "Our Pillars of Action",
-                p1Title: "Awareness",
-                p1Desc: "Focused on raising the awareness of both the art and sports worlds regarding their mutual connections, shared interests, and untapped potential.",
-                p2Title: "Production",
-                p2Desc: "Dedicated to curating and producing rich, high-quality content that emphasizes the powerful synergies and creative possibilities between these two spheres.",
-                p3Title: "Partnership",
-                p3Desc: "Securing profitable, long-term strategic partnerships that benefit actors and organizations across the entire spectrum of the Art and Sport worlds.",
+                pillarTitle: "Our Pillars of Action: Igniting the Future",
+                p1Title: "Inspire & Connect",
+                p1Desc: "We light the fuse. We educate, advocate, and demonstrate the powerful, shared potential between creatives, athletes, and organizations—proving they belong together.",
+                p2Title: "Create & Amplify",
+                p2Desc: "This is where the magic happens. We curate and produce rich, high-impact content—from documentaries to digital experiences—that shows the world what's possible when art and sport collide.",
+                p3Title: "Unite & Grow",
+                p3Desc: "We build the future together. We forge profitable, sustainable alliances that drive growth and maximize mutual benefits for everyone involved—from leagues to individual artists.",
 
-                contactPrompt: "Ready to explore the value at the intersection?",
-                contactCTA: "Start a conversation",
+                contactPrompt: "Ready to change the game?",
+                contactCTA: "Let's Talk Possibilities",
 
-                footerLegal: "© 2024 Passerelles. All Rights Reserved."
+                footerLegal: "© 2024 Passerelles. All Rights Reserved. Bridge the gap. Create the value."
             },
             fr: {
                 navBrand: "Passerelles",
                 navHome: "Accueil",
                 navPillars: "Piliers",
                 navContact: "Contact",
-                navCTA: "Lancer une conversation",
+                navCTA: "Parlons Possibilités",
                 langToggle: "EN",
 
-                heroSlogan: "L'Intersection est là où la Valeur est Créée.",
-                heroSubtext: "Construire des ponts entre l'Art et le Sport.",
+                heroSlogan: "Là où la Créativité rencontre la Compétition.",
+                heroSubtext: "Libérez le potentiel illimité de l'Art et du Sport.",
 
-                visionTitle: "Notre Mission",
-                visionBody: "Notre mission est de débloquer un nouvel engagement du public, de créer des flux de revenus innovants et de cultiver un développement professionnel durable en connectant délibérément ces deux forces puissantes.",
+                visionTitle: "Pourquoi Nous Existons",
+                visionBody: "Notre but est de déclencher des **collaborations inoubliables**. Nous générons un engagement renouvelé du public, créons de puissantes sources de revenus et favorisons le développement de carrières durables en unissant la beauté délibérée de l'Art et l'énergie brute du Sport.",
 
-                pillarTitle: "Nos Piliers d'Action",
-                p1Title: "Sensibilisation",
-                p1Desc: "Axé sur la sensibilisation des mondes de l'art et du sport concernant leurs connexions mutuelles, leurs intérêts partagés et leur potentiel inexploité.",
-                p2Title: "Production",
-                p2Desc: "Dédié à la conservation et à la production de contenu riche et de haute qualité qui souligne les puissantes synergies et les possibilités créatives entre ces deux sphères.",
-                p3Title: "Partenariat",
-                p3Desc: "Assurer des partenariats stratégiques rentables et à long terme qui profitent aux acteurs et aux organisations de tout le spectre des mondes de l'Art et du Sport.",
+                pillarTitle: "Nos Piliers d'Action : Allumer l'Avenir",
+                p1Title: "Inspirer et Connecter",
+                p1Desc: "Nous allumons la mèche. Nous éduquons, défendons et démontrons le potentiel commun et puissant entre les créateurs, les athlètes et les organisations—prouvant qu'ils sont faits pour s'entendre.",
+                p2Title: "Créer et Amplifier",
+                p2Desc: "C'est là que la magie opère. Nous conservons et produisons du contenu riche et percutant, des documentaires aux expériences numériques, qui montre au monde ce qui est possible lorsque l'art et le sport se rencontrent.",
+                p3Title: "Unir et Grandir",
+                p3Desc: "Nous bâtissons l'avenir ensemble. Nous forgeons des alliances rentables et durables qui stimulent la croissance et maximisent les avantages mutuels pour tous les acteurs impliqués, des ligues aux artistes individuels.",
 
-                contactPrompt: "Prêt à explorer la valeur à l'intersection ?",
-                contactCTA: "Lancer une conversation",
+                contactPrompt: "Prêt à changer la donne ?",
+                contactCTA: "Parlons Possibilités",
 
-                footerLegal: "© 2024 Passerelles. Tous droits réservés."
+                footerLegal: "© 2024 Passerelles. Tous droits réservés. Créez la valeur. Franchissez le fossé."
             }
         };
 
         let currentLang = 'en';
 
-        // Function to update the DOM content
+        // Parallax scroll handler
+        function handleParallax() {
+            const parallaxLayer = document.getElementById('parallax-layer');
+            // Check if element exists to avoid errors on pages without the layer
+            if (parallaxLayer) {
+                // Get the current vertical scroll position
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                // Define the scroll factor (0.5 means it moves at 50% of the scroll speed)
+                const scrollFactor = 0.5; 
+
+                // Calculate the new vertical translation (moves up slower than the foreground)
+                const yPos = -scrollTop * scrollFactor;
+
+                // Apply the transform for the parallax effect
+                parallaxLayer.style.transform = `translateY(${yPos}px)`;
+            }
+        }
+
+        // Function to update the DOM content (Language functionality)
         function updateContent(lang) {
             const data = content[lang];
             document.querySelectorAll('[data-text]').forEach(el => {
                 const key = el.getAttribute('data-text');
                 if (data[key]) {
-                    el.textContent = data[key];
+                    // Check if the content contains HTML tags (like <strong>)
+                    if (data[key].includes('**')) {
+                         // Note: We use text-accent-mustard for strong tags on dark backgrounds for visibility
+                         const strongReplacement = currentLang === 'en' ? '<strong class="text-accent-mustard">$1</strong>' : '<strong>$1</strong>';
+                         el.innerHTML = data[key].replace(/\*\*(.*?)\*\*/g, strongReplacement);
+                    } else {
+                        el.textContent = data[key];
+                    }
                 }
             });
 
             // Update CTA button text and Lang Toggle text
             document.getElementById('nav-cta').textContent = data.navCTA;
+            // The language toggle button should show the language it will switch TO
             document.getElementById('lang-toggle').textContent = data.langToggle;
+            // Mobile CTA update
+            document.getElementById('nav-cta-mobile').textContent = data.navCTA;
+            
+            // Update mobile lang toggle text
+            document.getElementById('lang-toggle-mobile').textContent = data.langToggle;
         }
 
         // Language toggle handler
@@ -171,130 +220,149 @@
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('lang-toggle').addEventListener('click', toggleLanguage);
+            document.getElementById('lang-toggle-mobile').addEventListener('click', toggleLanguage);
             updateContent(currentLang);
             setupAnimations();
+            handleParallax(); // Initial positioning for parallax
         });
+
+        // Attach parallax to scroll event
+        //document.addEventListener('scroll', handleParallax);
     </script>
 
-    <!-- Navigation Bar (Fixed) -->
-    <header class="sticky top-0 z-50 bg-white shadow-md">
+    <!-- Navigation Bar (Fixed - Deep Black for consistency) -->
+    <header class="sticky top-0 z-50 bg-primary-dark-bg shadow-lg shadow-black/50">
         <nav class="container mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-20">
-            <a href="#" class="text-2xl font-extrabold text-primary-dark tracking-wider">
+            <!-- Nav text is mustard yellow for high visibility -->
+            <a href="#" class="text-3xl font-black text-accent-mustard tracking-wider">
                 <span data-text="navBrand">Passerelles</span>
             </a>
             <div class="hidden lg:flex items-center space-x-8">
-                <a href="#hero" class="text-gray-600 hover:text-secondary-blue transition duration-300 font-medium" data-text="navHome">Home</a>
-                <a href="#pillars" class="text-gray-600 hover:text-secondary-blue transition duration-300 font-medium" data-text="navPillars">Pillars</a>
-                <a href="#contact" class="text-gray-600 hover:text-secondary-blue transition duration-300 font-medium" data-text="navContact">Contact</a>
-                <button id="lang-toggle" class="px-3 py-1 text-sm font-semibold rounded-full border border-primary-dark text-primary-dark hover:bg-primary-dark hover:text-white transition duration-300">FR</button>
-                <button id="nav-cta" class="bg-primary-dark text-white px-6 py-2 rounded-full font-semibold hover:bg-secondary-blue transition duration-300 shadow-lg">Start a conversation</button>
+                <!-- Links use light text/mustard accent -->
+                <a href="#hero" class="text-text-light hover:text-accent-mustard transition duration-300 font-semibold" data-text="navHome">Home</a>
+                <a href="#pillars" class="text-text-light hover:text-accent-mustard transition duration-300 font-semibold" data-text="navPillars">Pillars</a>
+                <a href="#contact" class="text-text-light hover:text-accent-mustard transition duration-300 font-semibold" data-text="navContact">Contact</a>
+                <!-- Lang Toggle Button (Light on Dark) -->
+                <button id="lang-toggle" class="px-4 py-2 text-sm font-bold rounded-full border border-text-light text-text-light hover:bg-primary-deep hover:border-primary-deep hover:text-white transition duration-300 transform hover:scale-105">FR</button>
+                <!-- Main CTA Button (Mustard on Dark Gray - high contrast) -->
+                <button id="nav-cta" class="bg-accent-mustard text-primary-deep px-8 py-3 rounded-full font-bold hover:bg-primary-deep hover:text-white transition duration-300 shadow-xl transform hover:scale-105">Let's Talk Possibilities</button>
             </div>
 
             <!-- Mobile Menu Toggle (Simplified for single-file) -->
             <div class="flex lg:hidden items-center space-x-3">
-                <button id="lang-toggle-mobile" onclick="toggleLanguage()" class="px-3 py-1 text-sm font-semibold rounded-full border border-primary-dark text-primary-dark transition duration-300">FR</button>
-                <button id="nav-cta-mobile" class="bg-primary-dark text-white px-4 py-2 text-sm rounded-full font-semibold hover:bg-secondary-blue transition duration-300 shadow-md" data-text="navCTA">Start a conversation</button>
+                <!-- Lang Toggle Button (Light on Dark) -->
+                <button id="lang-toggle-mobile" class="px-3 py-1 text-sm font-semibold rounded-full border border-text-light text-text-light transition duration-300">FR</button>
+                <!-- Mobile CTA (Mustard on Dark Gray) -->
+                <button id="nav-cta-mobile" class="bg-accent-mustard text-primary-deep px-4 py-2 text-sm rounded-full font-bold hover:bg-primary-deep hover:text-white transition duration-300 shadow-md" data-text="navCTA">Let's Talk Possibilities</button>
             </div>
         </nav>
     </header>
 
     <main>
-        <!-- 1. Hero Section -->
-        <section id="hero" class="relative bg-primary-dark min-h-[70vh] flex items-center justify-center p-8 overflow-hidden">
-            <!-- Subtle diagonal grid/texture overlay -->
-            <div class="absolute inset-0 bg-secondary-blue opacity-5"></div>
+        <!-- 1. Hero Section (Deep Black BG) -->
+        <section id="hero" class="relative bg-primary-dark-bg min-h-[75vh] flex items-center justify-center p-8 overflow-hidden">
+            <!-- Parallax Background Layer (Mustard gradient on dark background) -->
+            <div id="parallax-layer" class="absolute inset-0 opacity-10" style="background: radial-gradient(circle at top right, #FFC82D 10%, transparent 60%), radial-gradient(circle at bottom left, #FFC82D 10%, transparent 60%);"></div>
 
             <div class="relative z-10 text-center max-w-6xl mx-auto py-20">
-                <h1 id="hero-text" class="text-white text-4xl sm:text-6xl lg:text-8xl font-black mb-6 animated-item is-visible" style="animation-delay: 0.1s;">
-                    <span data-text="heroSlogan">The Intersection is Where Value is Created.</span>
+                <h1 id="hero-text" class="text-white text-5xl sm:text-7xl lg:text-9xl font-black mb-6 animated-item is-visible" style="animation-delay: 0.1s;">
+                    <span data-text="heroSlogan">Where Creativity Meets Competition.</span>
                 </h1>
-                <p class="text-accent-green text-xl sm:text-2xl lg:text-3xl font-medium mb-10 animated-item" style="animation-delay: 0.3s;">
-                    <span data-text="heroSubtext">Building bridges between Art and Sport.</span>
+                <!-- Accent text uses Mustard Yellow -->
+                <p class="text-accent-mustard text-xl sm:text-3xl lg:text-4xl font-extrabold mb-12 animated-item" style="animation-delay: 0.3s;">
+                    <span data-text="heroSubtext">Unleashing the full potential of Art and Sport.</span>
                 </p>
-                <a href="#contact" class="inline-block bg-accent-green text-primary-dark px-10 py-4 text-lg font-bold rounded-lg shadow-xl hover:bg-white hover:text-primary-dark transition duration-300 transform hover:scale-105 animated-item" style="animation-delay: 0.5s;">
-                    <span data-text="navCTA">Start a conversation</span>
+                <!-- CTA Button uses Mustard Yellow background and Deep Purple text -->
+                <a href="#contact" class="inline-block bg-accent-mustard text-primary-deep px-12 py-5 text-xl font-bold rounded-full shadow-2xl hover:bg-primary-deep hover:text-white transition duration-300 transform hover:scale-110 animated-item" style="animation-delay: 0.5s;">
+                    <span data-text="navCTA">Let's Talk Possibilities</span>
                 </a>
             </div>
         </section>
 
-        <!-- 2. Mission/Vision Section -->
-        <section id="mission" class="bg-white py-20 px-8 sm:px-16 lg:px-24">
+        <!-- 2. Mission/Vision Section (Deep Black Background) -->
+        <section id="mission" class="bg-primary-dark-bg py-24 px-8 sm:px-16 lg:px-24">
             <div class="max-w-4xl mx-auto text-center animated-item">
-                <h2 class="text-4xl font-extrabold mb-6 text-secondary-blue" data-text="visionTitle">Our Mission</h2>
-                <div class="w-20 h-1 bg-accent-green mx-auto mb-8 rounded-full"></div>
-                <p class="text-xl leading-relaxed text-gray-700" data-text="visionBody">
-                    Our mission is to unlock new audience engagement, create innovative revenue streams, and cultivate sustainable professional development by deliberately connecting these two powerful forces.
+                <!-- Heading uses light text on dark background -->
+                <h2 class="text-5xl font-black mb-6 text-text-light" data-text="visionTitle">Why We Exist</h2>
+                <!-- Accent line uses the vibrant yellow color -->
+                <div class="w-32 h-1 bg-accent-mustard mx-auto mb-10 rounded-full"></div>
+                <!-- Body text uses light text on dark background -->
+                <p class="text-2xl leading-relaxed text-text-light" data-text="visionBody">
+                    We're here to spark <strong class="text-accent-mustard">unforgettable collaboration</strong>. We unlock fresh audience engagement, build powerful new revenue streams, and cultivate sustainable careers by bringing the deliberate beauty of Art and the raw energy of Sport together.
                 </p>
             </div>
         </section>
 
-        <!-- 3. Pillars of Action -->
-        <section id="pillars" class="py-20 px-4 sm:px-8 lg:px-16" id="pillars-bg">
+        <!-- 3. Pillars of Action (Deep Black Background with White Cards) -->
+        <section id="pillars" class="py-24 px-4 sm:px-8 lg:px-16">
             <div class="max-w-6xl mx-auto">
-                <h2 class="text-4xl font-extrabold text-center mb-16 text-primary-dark animated-item" data-text="pillarTitle">Our Pillars of Action</h2>
+                <!-- Heading uses light text on dark background -->
+                <h2 class="text-5xl font-black text-center mb-20 text-text-light animated-item" data-text="pillarTitle">Our Pillars of Action: Igniting the Future</h2>
 
-                <div class="grid md:grid-cols-3 gap-10">
+                <div class="grid md:grid-cols-3 gap-12">
 
-                    <!-- Pillar 1: Awareness -->
-                    <div class="bg-white p-8 rounded-xl shadow-2xl animated-item" style="transition-delay: 0.1s;">
-                        <div class="flex items-center space-x-4 mb-4">
-                            <!-- Icon for Awareness (Lightbulb/Vision) -->
-                            <div class="w-12 h-12 flex items-center justify-center bg-accent-green rounded-full">
-                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.108a12.025 12.025 0 01-4.32 2.35c.123.637.227 1.3.303 2H12c-4.418 0-8 3.582-8 8s3.582 8 8 8 8-3.582 8-8V8.392c-.287-.234-.572-.48-.857-.74z"></path></svg>
+                    <!-- Pillar 1: Inspire & Connect (White Card) -->
+                    <div class="bg-white p-10 rounded-2xl animated-item pillar-card" style="transition-delay: 0.1s;">
+                        <div class="flex items-center space-x-4 mb-5">
+                            <!-- Icon uses Mustard Yellow accent, text is Deep Purple for contrast on white -->
+                            <div class="w-14 h-14 flex items-center justify-center bg-accent-mustard rounded-full shadow-xl">
+                                <svg class="w-7 h-7 text-primary-deep" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.108a12.025 12.025 0 01-4.32 2.35c.123.637.227 1.3.303 2H12c-4.418 0-8 3.582-8 8s3.582 8 8 8 8-3.582 8-8V8.392c-.287-.234-.572-.48-.857-.74z"></path></svg>
                             </div>
-                            <h3 class="text-2xl font-bold text-secondary-blue" data-text="p1Title">Awareness</h3>
+                            <h3 class="text-2xl font-black text-primary-deep" data-text="p1Title">Inspire & Connect</h3>
                         </div>
-                        <div class="w-full h-1 bg-primary-dark/10 mb-4 rounded-full"></div>
-                        <p class="text-gray-600" data-text="p1Desc">Focused on raising the awareness of both the art and sports worlds regarding their mutual connections, shared interests, and untapped potential.</p>
+                        <div class="w-full h-1 bg-subtle-gray/70 mb-5 rounded-full"></div>
+                        <p class="text-lg text-gray-700" data-text="p1Desc">We light the fuse. We educate, advocate, and demonstrate the powerful, shared potential between creatives, athletes, and organizations—proving they belong together.</p>
                     </div>
 
-                    <!-- Pillar 2: Production -->
-                    <div class="bg-white p-8 rounded-xl shadow-2xl animated-item" style="transition-delay: 0.3s;">
-                        <div class="flex items-center space-x-4 mb-4">
-                            <!-- Icon for Production (Film/Curating) -->
-                            <div class="w-12 h-12 flex items-center justify-center bg-primary-dark rounded-full">
-                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                    <!-- Pillar 2: Create & Amplify (White Card) -->
+                    <div class="bg-white p-10 rounded-2xl animated-item pillar-card" style="transition-delay: 0.3s;">
+                        <div class="flex items-center space-x-4 mb-5">
+                            <!-- Icon uses Deep Purple primary color, text is Deep Purple for contrast on white -->
+                            <div class="w-14 h-14 flex items-center justify-center bg-primary-deep rounded-full shadow-xl">
+                                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
                             </div>
-                            <h3 class="text-2xl font-bold text-secondary-blue" data-text="p2Title">Production</h3>
+                            <h3 class="text-2xl font-black text-primary-deep" data-text="p2Title">Create & Amplify</h3>
                         </div>
-                        <div class="w-full h-1 bg-primary-dark/10 mb-4 rounded-full"></div>
-                        <p class="text-gray-600" data-text="p2Desc">Dedicated to curating and producing rich, high-quality content that emphasizes the powerful synergies and creative possibilities between these two spheres.</p>
+                        <div class="w-full h-1 bg-subtle-gray/70 mb-5 rounded-full"></div>
+                        <p class="text-lg text-gray-700" data-text="p2Desc">This is where the magic happens. We curate and produce rich, high-impact content—from documentaries to digital experiences—that shows the world what's possible when art and sport collide.</p>
                     </div>
 
-                    <!-- Pillar 3: Partnership -->
-                    <div class="bg-white p-8 rounded-xl shadow-2xl animated-item" style="transition-delay: 0.5s;">
-                        <div class="flex items-center space-x-4 mb-4">
-                            <!-- Icon for Partnership (Handshake/Connection) -->
-                            <div class="w-12 h-12 flex items-center justify-center bg-secondary-blue rounded-full">
-                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.586a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                    <!-- Pillar 3: Unite & Grow (White Card) -->
+                    <div class="bg-white p-10 rounded-2xl animated-item pillar-card" style="transition-delay: 0.5s;">
+                        <div class="flex items-center space-x-4 mb-5">
+                            <!-- Icon uses Mustard Yellow accent, text is Deep Purple for contrast on white -->
+                            <div class="w-14 h-14 flex items-center justify-center bg-accent-mustard rounded-full shadow-xl">
+                                <svg class="w-7 h-7 text-primary-deep" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.586a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
                             </div>
-                            <h3 class="text-2xl font-bold text-secondary-blue" data-text="p3Title">Partnership</h3>
+                            <h3 class="text-2xl font-black text-primary-deep" data-text="p3Title">Unite & Grow</h3>
                         </div>
-                        <div class="w-full h-1 bg-primary-dark/10 mb-4 rounded-full"></div>
-                        <p class="text-gray-600" data-text="p3Desc">Securing profitable, long-term strategic partnerships that benefit actors and organizations across the entire spectrum of the Art and Sport worlds.</p>
+                        <div class="w-full h-1 bg-subtle-gray/70 mb-5 rounded-full"></div>
+                        <p class="text-lg text-gray-700" data-text="p3Desc">We build the future together. We forge profitable, sustainable alliances that drive growth and maximize mutual benefits for everyone involved—from leagues to individual artists.</p>
                     </div>
 
                 </div>
             </div>
         </section>
 
-        <!-- 4. Contact CTA Block (Replicating a Footer CTA Strip) -->
-        <section id="contact" class="bg-primary-dark py-20 px-8 sm:px-16 lg:px-24">
+        <!-- 4. Contact CTA Block (Deep Purple BG for strong final CTA - kept for color break) -->
+        <section id="contact" class="bg-primary-dark-bg py-24 px-8 sm:px-16 lg:px-24">
             <div class="max-w-4xl mx-auto text-center animated-item">
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-6" data-text="contactPrompt">Ready to explore the value at the intersection?</h2>
-                <a href="mailto:info@passerelles.com" class="inline-block bg-accent-green text-primary-dark px-10 py-4 text-lg font-bold rounded-lg shadow-xl hover:bg-white transition duration-300 transform hover:scale-105">
-                    <span data-text="contactCTA">Start a conversation</span>
+                <h2 class="text-4xl sm:text-5xl font-black text-white mb-8" data-text="contactPrompt">Ready to change the game?</h2>
+                <!-- CTA Button uses Mustard Yellow background and Deep Purple text -->
+                <a href="mailto:info@passerelles.com" class="inline-block bg-accent-mustard text-primary-deep px-12 py-5 text-xl font-bold rounded-full shadow-2xl hover:bg-white hover:text-primary-deep transition duration-300 transform hover:scale-110">
+                    <span data-text="contactCTA">Let's Talk Possibilities</span>
                 </a>
-                <p class="mt-4 text-gray-400">info@passerelles.com</p>
+                <!-- Subtle text uses subtle-gray on the dark background -->
+                <p class="mt-6 text-subtle-gray font-medium">info@passerelles.com</p>
             </div>
         </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-off-white py-10 px-8">
-        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center text-gray-600">
-            <div class="text-xl font-bold mb-4 md:mb-0 text-primary-dark" data-text="navBrand">Passerelles</div>
-            <p class="text-sm" data-text="footerLegal">© 2024 Passerelles. All Rights Reserved.</p>
+    <!-- Footer (Deep Black BG) -->
+    <footer class="bg-primary-dark-bg py-10 px-8">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center text-subtle-gray">
+            <div class="text-xl font-black mb-4 md:mb-0 text-white" data-text="navBrand">Passerelles</div>
+            <p class="text-sm" data-text="footerLegal">© 2024 Passerelles. All Rights Reserved. Bridge the gap. Create the value.</p>
         </div>
     </footer>
 
