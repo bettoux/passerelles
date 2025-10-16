@@ -166,6 +166,22 @@
 
         let currentLang = 'en';
 
+        // Load content from localStorage if available
+        function loadSavedContent() {
+            const savedContent = localStorage.getItem('passerellesContent');
+            if (savedContent) {
+                try {
+                    const parsed = JSON.parse(savedContent);
+                    // Merge saved content with default content
+                    if (parsed.en) Object.assign(content.en, parsed.en);
+                    if (parsed.fr) Object.assign(content.fr, parsed.fr);
+                    console.log('✅ Content loaded from admin panel');
+                } catch (e) {
+                    console.error('Error loading saved content:', e);
+                }
+            }
+        }
+
         function handleParallax() {
             const parallaxLayer = document.getElementById('parallax-layer');
             if (parallaxLayer) {
@@ -240,6 +256,9 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
+            // Load saved content first
+            loadSavedContent();
+            
             document.getElementById('lang-toggle').addEventListener('click', toggleLanguage);
             document.getElementById('lang-toggle-mobile').addEventListener('click', () => {
                 toggleLanguage();
@@ -284,8 +303,8 @@
         </nav>
         
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="lg:hidden bg-primary-dark-bg border-t border-primary-deep">
-            <nav class="flex flex-col items-center py-4 space-y-3">
+        <div id="mobile-menu" class="items-center lg:hidden bg-primary-dark-bg border-t border-primary-deep">
+            <nav class="flex flex-col px-4 py-4 space-y-3 items-center">
                 <a href="#hero" class="mobile-nav-link text-text-light hover:text-accent-mustard transition duration-300 font-semibold py-3" data-text="navHome">Home</a>
                 <a href="#pillars" class="mobile-nav-link text-text-light hover:text-accent-mustard transition duration-300 font-semibold py-3" data-text="navPillars">Pillars</a>
                 <a href="#contact" class="mobile-nav-link text-text-light hover:text-accent-mustard transition duration-300 font-semibold py-3" data-text="navContact">Contact</a>
@@ -369,7 +388,7 @@
                 <a href="mailto:info@passerelles.com" class="inline-block bg-accent-mustard text-primary-deep px-12 py-5 text-xl font-bold rounded-full shadow-2xl hover:bg-white hover:text-primary-deep transition duration-300 transform hover:scale-110">
                     <span data-text="contactCTA">Let's Talk Possibilities</span>
                 </a>
-                <p class="mt-6 text-subtle-gray font-medium">passerelles@bettara.com</p>
+                <p class="mt-6 text-subtle-gray font-medium">info@passerelles.com</p>
             </div>
         </section>
     </main>

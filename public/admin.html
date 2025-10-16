@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passerelles Content Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .section-card {
+            transition: all 0.3s ease;
+        }
+        .section-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .success-message {
+            animation: slideIn 0.3s ease-out;
+        }
+        @keyframes slideIn {
+            from {
+                transform: translateY(-100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    
+    <!-- Success Message -->
+    <div id="successMessage" class="hidden fixed top-4 right-4 bg-green-500 text-white px-6 py-4 rounded-lg shadow-lg z-50 success-message">
+        <div class="flex items-center space-x-2">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span class="font-semibold">Changes saved successfully!</span>
+        </div>
+    </div>
+
+    <div class="container mx-auto px-4 py-8 max-w-6xl">
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-purple-900 to-purple-700 text-white rounded-lg shadow-lg p-8 mb-8">
+            <h1 class="text-4xl font-black mb-2">Passerelles Content Manager</h1>
+            <p class="text-purple-200">Edit your website content in English and French</p>
+            <p class="text-sm text-purple-300 mt-2">💡 Tip: Use ** around text to make it bold (e.g., **bold text**)</p>
+        </div>
+
+        <!-- Language Tabs -->
+        <div class="flex space-x-4 mb-6">
+            <button onclick="switchLanguage('en')" id="tab-en" class="px-6 py-3 rounded-lg font-bold transition bg-purple-900 text-white shadow-lg">
+                English 🇬🇧
+            </button>
+            <button onclick="switchLanguage('fr')" id="tab-fr" class="px-6 py-3 rounded-lg font-bold transition bg-gray-300 text-gray-700 hover:bg-gray-400">
+                Français 🇫🇷
+            </button>
+        </div>
+
+        <!-- Navigation Section -->
+        <div class="section-card bg-white rounded-lg shadow-md p-6 mb-6">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4 border-b-2 border-purple-900 pb-2">📋 Navigation</h2>
+            <div class="grid md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Brand Name</label>
+                    <input type="text" data-field="navBrand" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Home Link</label>
+                    <input type="text" data-field="navHome" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Pillars Link</label>
+                    <input type="text" data-field="navPillars" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Contact Link</label>
+                    <input type="text" data-field="navContact" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">CTA Button Text</label>
+                    <input type="text" data-field="navCTA" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Language Toggle</label>
+                    <input type="text" data-field="langToggle" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="EN or FR">
+                </div>
+            </div>
+        </div>
+
+        <!-- Hero Section -->
+        <div class="section-card bg-white rounded-lg shadow-md p-6 mb-6">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4 border-b-2 border-purple-900 pb-2">🚀 Hero Section</h2>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Main Headline</label>
+                    <input type="text" data-field="heroSlogan" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="Where Creativity Meets Competition.">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Subtext</label>
+                    <input type="text" data-field="heroSubtext" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="Unleashing the full potential...">
+                </div>
+            </div>
+        </div>
+
+        <!-- Vision/Mission Section -->
+        <div class="section-card bg-white rounded-lg shadow-md p-6 mb-6">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4 border-b-2 border-purple-900 pb-2">💡 Vision Section</h2>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Section Title</label>
+                    <input type="text" data-field="visionTitle" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="Why We Exist">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Vision Text (use **text** for bold)</label>
+                    <textarea data-field="visionBody" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="We're here to spark **unforgettable collaboration**..."></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pillars Section -->
+        <div class="section-card bg-white rounded-lg shadow-md p-6 mb-6">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4 border-b-2 border-purple-900 pb-2">🏛️ Pillars Section</h2>
+            <div class="space-y-4 mb-6">
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Section Title</label>
+                    <input type="text" data-field="pillarTitle" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="Our Pillars of Action">
+                </div>
+            </div>
+
+            <!-- Pillar 1 -->
+            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-4 rounded">
+                <h3 class="font-bold text-lg text-yellow-800 mb-3">Pillar 1</h3>
+                <div class="space-y-3">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Title</label>
+                        <input type="text" data-field="p1Title" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="Inspire & Connect">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Description</label>
+                        <textarea data-field="p1Desc" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pillar 2 -->
+            <div class="bg-purple-50 border-l-4 border-purple-400 p-4 mb-4 rounded">
+                <h3 class="font-bold text-lg text-purple-800 mb-3">Pillar 2</h3>
+                <div class="space-y-3">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Title</label>
+                        <input type="text" data-field="p2Title" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="Create & Amplify">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Description</label>
+                        <textarea data-field="p2Desc" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pillar 3 -->
+            <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded">
+                <h3 class="font-bold text-lg text-blue-800 mb-3">Pillar 3</h3>
+                <div class="space-y-3">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Title</label>
+                        <input type="text" data-field="p3Title" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="Unite & Grow">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Description</label>
+                        <textarea data-field="p3Desc" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Section -->
+        <div class="section-card bg-white rounded-lg shadow-md p-6 mb-6">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4 border-b-2 border-purple-900 pb-2">📧 Contact Section</h2>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Contact Prompt</label>
+                    <input type="text" data-field="contactPrompt" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="Ready to change the game?">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Contact CTA Button</label>
+                    <input type="text" data-field="contactCTA" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="Let's Talk Possibilities">
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Section -->
+        <div class="section-card bg-white rounded-lg shadow-md p-6 mb-6">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4 border-b-2 border-purple-900 pb-2">📄 Footer</h2>
+            <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">Copyright Text</label>
+                <textarea data-field="footerLegal" rows="2" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="© 2024 Passerelles. All Rights Reserved..."></textarea>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-col sm:flex-row gap-4 sticky bottom-4">
+            <button onclick="saveContent()" class="flex-1 bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-8 rounded-lg shadow-xl transition transform hover:scale-105 flex items-center justify-center space-x-2">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path>
+                </svg>
+                <span>Save All Changes</span>
+            </button>
+            <button onclick="exportContent()" class="flex-1 bg-purple-600 hover:bg-purple-700 text-white font-bold py-4 px-8 rounded-lg shadow-xl transition transform hover:scale-105 flex items-center justify-center space-x-2">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                </svg>
+                <span>Download Backup</span>
+            </button>
+            <a href="index.html" target="_blank" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-lg shadow-xl transition transform hover:scale-105 flex items-center justify-center space-x-2">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                </svg>
+                <span>Preview Site</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Content structure matching your index.html
+        const contentData = {
+            en: {
+                navBrand: "Passerelles",
+                navHome: "Home",
+                navPillars: "Pillars",
+                navContact: "Contact",
+                navCTA: "Let's Talk Possibilities",
+                langToggle: "FR",
+                heroSlogan: "Where Creativity Meets Competition.",
+                heroSubtext: "Unleashing the full potential of Art and Sport.",
+                visionTitle: "Why We Exist",
+                visionBody: "We're here to spark **unforgettable collaboration**. We unlock fresh audience engagement, build powerful new revenue streams, and cultivate sustainable careers by bringing the deliberate beauty of Art and the raw energy of Sport together.",
+                pillarTitle: "Our Pillars of Action: Igniting the Future",
+                p1Title: "Inspire & Connect",
+                p1Desc: "We light the fuse. We educate, advocate, and demonstrate the powerful, shared potential between creatives, athletes, and organizations—proving they belong together.",
+                p2Title: "Create & Amplify",
+                p2Desc: "This is where the magic happens. We curate and produce rich, high-impact content—from documentaries to digital experiences—that shows the world what's possible when art and sport collide.",
+                p3Title: "Unite & Grow",
+                p3Desc: "We build the future together. We forge profitable, sustainable alliances that drive growth and maximize mutual benefits for everyone involved—from leagues to individual artists.",
+                contactPrompt: "Ready to change the game?",
+                contactCTA: "Let's Talk Possibilities",
+                footerLegal: "© 2024 Passerelles. All Rights Reserved. Bridge the gap. Create the value."
+            },
+            fr: {
+                navBrand: "Passerelles",
+                navHome: "Accueil",
+                navPillars: "Piliers",
+                navContact: "Contact",
+                navCTA: "Parlons Possibilités",
+                langToggle: "EN",
+                heroSlogan: "Là où la Créativité rencontre la Compétition.",
+                heroSubtext: "Libérez le potentiel illimité de l'Art et du Sport.",
+                visionTitle: "Pourquoi Nous Existons",
+                visionBody: "Notre but est de déclencher des **collaborations inoubliables**. Nous générons un engagement renouvelé du public, créons de puissantes sources de revenus et favorisons le développement de carrières durables en unissant la beauté délibérée de l'Art et l'énergie brute du Sport.",
+                pillarTitle: "Nos Piliers d'Action : Allumer l'Avenir",
+                p1Title: "Inspirer et Connecter",
+                p1Desc: "Nous allumons la mèche. Nous éduquons, défendons et démontrons le potentiel commun et puissant entre les créateurs, les athlètes et les organisations—prouvant qu'ils sont faits pour s'entendre.",
+                p2Title: "Créer et Amplifier",
+                p2Desc: "C'est là que la magie opère. Nous conservons et produisons du contenu riche et percutant, des documentaires aux expériences numériques, qui montre au monde ce qui est possible lorsque l'art et le sport se rencontrent.",
+                p3Title: "Unir et Grandir",
+                p3Desc: "Nous bâtissons l'avenir ensemble. Nous forgeons des alliances rentables et durables qui stimulent la croissance et maximisent les avantages mutuels pour tous les acteurs impliqués, des ligues aux artistes individuels.",
+                contactPrompt: "Prêt à changer la donne ?",
+                contactCTA: "Parlons Possibilités",
+                footerLegal: "© 2024 Passerelles. Tous droits réservés. Créez la valeur. Franchissez le fossé."
+            }
+        };
+
+        let currentLang = 'en';
+
+        // Load saved content from localStorage on page load
+        function loadContent() {
+            const savedContent = localStorage.getItem('passerellesContent');
+            if (savedContent) {
+                const parsed = JSON.parse(savedContent);
+                contentData.en = parsed.en;
+                contentData.fr = parsed.fr;
+            }
+            populateFields();
+        }
+
+        // Populate form fields with current language data
+        function populateFields() {
+            const data = contentData[currentLang];
+            document.querySelectorAll('[data-field]').forEach(field => {
+                const key = field.getAttribute('data-field');
+                if (data[key] !== undefined) {
+                    field.value = data[key];
+                }
+            });
+        }
+
+        // Switch between languages
+        function switchLanguage(lang) {
+            // Save current language data before switching
+            saveCurrentLanguageData();
+            
+            currentLang = lang;
+            
+            // Update tab styles
+            document.getElementById('tab-en').className = lang === 'en' 
+                ? 'px-6 py-3 rounded-lg font-bold transition bg-purple-900 text-white shadow-lg'
+                : 'px-6 py-3 rounded-lg font-bold transition bg-gray-300 text-gray-700 hover:bg-gray-400';
+            
+            document.getElementById('tab-fr').className = lang === 'fr'
+                ? 'px-6 py-3 rounded-lg font-bold transition bg-purple-900 text-white shadow-lg'
+                : 'px-6 py-3 rounded-lg font-bold transition bg-gray-300 text-gray-700 hover:bg-gray-400';
+            
+            populateFields();
+        }
+
+        // Save current form data to contentData object
+        function saveCurrentLanguageData() {
+            document.querySelectorAll('[data-field]').forEach(field => {
+                const key = field.getAttribute('data-field');
+                contentData[currentLang][key] = field.value;
+            });
+        }
+
+        // Save all content to localStorage
+        function saveContent() {
+            saveCurrentLanguageData();
+            
+            // Save to localStorage
+            localStorage.setItem('passerellesContent', JSON.stringify(contentData));
+            
+            // Show success message
+            const successMsg = document.getElementById('successMessage');
+            successMsg.classList.remove('hidden');
+            setTimeout(() => {
+                successMsg.classList.add('hidden');
+            }, 3000);
+            
+            console.log('Content saved to localStorage');
+        }
+
+        // Export content as JSON file
+        function exportContent() {
+            saveCurrentLanguageData();
+            
+            const dataStr = JSON.stringify(contentData, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'passerelles-content-backup.json';
+            link.click();
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', loadContent);
+    </script>
+
+</body>
+</html>
