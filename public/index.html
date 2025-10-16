@@ -192,15 +192,15 @@
             }
         }
 
-        function updateContent(lang) {
+        /*function updateContent(lang) {
             const data = content[lang];
             document.querySelectorAll('[data-text]').forEach(el => {
                 const key = el.getAttribute('data-text');
                 if (data[key]) {
                     if (data[key].includes('**')) {
                          const strongReplacement = '<strong class="text-accent-mustard">$1</strong>';
-                         el.innerHTML = data[key].replace(/\*\*(.*?)\*\*/g, strongReplacement);
-                    } else {
+                         el.innerHTML = data[key].replace(/\*\*(.*?)\*\*//*g, strongReplacement);
+                   /* } else {
                         el.textContent = data[key];
                     }
                 }
@@ -210,7 +210,34 @@
             document.getElementById('lang-toggle').textContent = data.langToggle;
             document.getElementById('nav-cta-mobile').textContent = data.navCTA;
             document.getElementById('lang-toggle-mobile').textContent = data.langToggle;
+        }*/
+
+        function updateContent(lang) {
+    const data = content[lang];
+    document.querySelectorAll('[data-text]').forEach(el => {
+        const key = el.getAttribute('data-text');
+        if (data[key]) {
+            let textContent = data[key];
+            
+            // Handle line breaks (\n)
+            if (textContent.includes('\\n')) {
+                textContent = textContent.replace(/\\n/g, '<br>');
+            }
+            
+            // Handle bold text (**)
+            if (textContent.includes('**')) {
+                textContent = textContent.replace(/\*\*(.*?)\*\*/g, '<strong class="text-accent-mustard">$1</strong>');
+            }
+            
+            // Set innerHTML if we have HTML, otherwise textContent
+            if (textContent.includes('<')) {
+                el.innerHTML = textContent;
+            } else {
+                el.textContent = textContent;
+            }
         }
+    });
+}
 
         function toggleLanguage() {
             currentLang = currentLang === 'en' ? 'fr' : 'en';
@@ -548,7 +575,6 @@
 </body>
 
 </html>
-
 
 
 
