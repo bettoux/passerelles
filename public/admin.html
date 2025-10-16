@@ -113,8 +113,59 @@
                     <input type="text" data-field="visionTitle" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="Why We Exist">
                 </div>
                 <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-2">Vision Text (use **text** for bold)</label>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Vision Text (use **text** for bold, \\n for line breaks)</label>
                     <textarea data-field="visionBody" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="We're here to spark **unforgettable collaboration**..."></textarea>
+                    <p class="text-xs text-gray-500 mt-1">💡 Use **text** for bold and type \\n for line breaks</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Story/Convictions Section -->
+        <div class="section-card bg-white rounded-lg shadow-md p-6 mb-6">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4 border-b-2 border-purple-900 pb-2">📖 Story & Convictions Section</h2>
+            
+            <!-- Conviction 1 -->
+            <div class="bg-purple-50 border-l-4 border-purple-400 p-4 mb-4 rounded">
+                <h3 class="font-bold text-lg text-purple-800 mb-3">Conviction 1</h3>
+                <div class="space-y-3">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Title</label>
+                        <input type="text" data-field="convictTitle1" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Description</label>
+                        <textarea data-field="convict1" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Conviction 2 -->
+            <div class="bg-blue-50 border-l-4 border-blue-400 p-4 mb-4 rounded">
+                <h3 class="font-bold text-lg text-blue-800 mb-3">Conviction 2</h3>
+                <div class="space-y-3">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Title</label>
+                        <input type="text" data-field="convictTitle2" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Description</label>
+                        <textarea data-field="convict2" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Conviction 3 -->
+            <div class="bg-green-50 border-l-4 border-green-400 p-4 rounded">
+                <h3 class="font-bold text-lg text-green-800 mb-3">Conviction 3</h3>
+                <div class="space-y-3">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Title</label>
+                        <input type="text" data-field="convictTitle3" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Description</label>
+                        <textarea data-field="convict3" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"></textarea>
+                    </div>
                 </div>
             </div>
         </div>
@@ -126,6 +177,10 @@
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-2">Section Title</label>
                     <input type="text" data-field="pillarTitle" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="Our Pillars of Action">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Section Description</label>
+                    <textarea data-field="pillardesc" rows="2" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"></textarea>
                 </div>
             </div>
 
@@ -237,13 +292,20 @@
                 heroSubtext: "Unleashing the full potential of Art and Sport.",
                 visionTitle: "Why We Exist",
                 visionBody: "We're here to spark **unforgettable collaboration**. We unlock fresh audience engagement, build powerful new revenue streams, and cultivate sustainable careers by bringing the deliberate beauty of Art and the raw energy of Sport together.",
-                pillarTitle: "Our Pillars of Action: Igniting the Future",
-                p1Title: "Inspire & Connect",
-                p1Desc: "We light the fuse. We educate, advocate, and demonstrate the powerful, shared potential between creatives, athletes, and organizations—proving they belong together.",
-                p2Title: "Create & Amplify",
-                p2Desc: "This is where the magic happens. We curate and produce rich, high-impact content—from documentaries to digital experiences—that shows the world what's possible when art and sport collide.",
-                p3Title: "Unite & Grow",
-                p3Desc: "We build the future together. We forge profitable, sustainable alliances that drive growth and maximize mutual benefits for everyone involved—from leagues to individual artists.",
+                convictTitle1: "Challenge the External Frame",
+                convict1: "We demand a change in how society views both the athlete and the artist. Our goal is to unify the perception of both as masters of form, rhythm, and profound intellectual discipline.",
+                convictTitle2: "Break the Internal Limit",
+                convict2: "We empower athletes to redefine their own identity. By highlighting their transferable skills, we shatter the self-imposed limits that restrict their scope of opportunities during and after their primary career.",
+                convictTitle3: "Complete the Room",
+                convict3: "We are strategic network builders, actively identifying and integrating key players—institutions, disciplines, and funding models—that are not currently in the room but are essential for sustainable, large-scale synergy.",
+                pillarTitle: "Our Pillars of Synergy",
+                pillardesc: "We guide our partners and community through a focused, three-step journey to unlock mutual growth and sustainable institutional connections.",
+                p1Title: "The Nexus Lab",
+                p1Desc: "The Nexus Lab is our thought leadership division, dedicated to researching and defining the powerful synergies between artistic mastery and athletic performance. We publish expert content and research to establish the new professional lexicon for integrated excellence.",
+                p2Title: "Transformative Programs",
+                p2Desc: "Transformative Programs delivers our core, scalable services, including specialized workshops and curricula designed to translate conceptual synergy into measurable, durable results. These ready-to-deploy programs focus on enhancing resilience, leadership, and performance across both fields",
+                p3Title: "Strategic Alliances",
+                p3Desc: "The Strategic Alliances pillar is our high-value consulting service, acting as a trusted broker to match major Arts and Sports institutions for impactful, co-branded initiatives. We structure partnerships that align mission and resources to maximize mutual value and lasting social legacy.",
                 contactPrompt: "Ready to change the game?",
                 contactCTA: "Let's Talk Possibilities",
                 footerLegal: "© 2024 Passerelles. All Rights Reserved. Bridge the gap. Create the value."
@@ -259,13 +321,20 @@
                 heroSubtext: "Libérez le potentiel illimité de l'Art et du Sport.",
                 visionTitle: "Pourquoi Nous Existons",
                 visionBody: "Notre but est de déclencher des **collaborations inoubliables**. Nous générons un engagement renouvelé du public, créons de puissantes sources de revenus et favorisons le développement de carrières durables en unissant la beauté délibérée de l'Art et l'énergie brute du Sport.",
-                pillarTitle: "Nos Piliers d'Action : Allumer l'Avenir",
-                p1Title: "Inspirer et Connecter",
-                p1Desc: "Nous allumons la mèche. Nous éduquons, défendons et démontrons le potentiel commun et puissant entre les créateurs, les athlètes et les organisations—prouvant qu'ils sont faits pour s'entendre.",
-                p2Title: "Créer et Amplifier",
-                p2Desc: "C'est là que la magie opère. Nous conservons et produisons du contenu riche et percutant, des documentaires aux expériences numériques, qui montre au monde ce qui est possible lorsque l'art et le sport se rencontrent.",
-                p3Title: "Unir et Grandir",
-                p3Desc: "Nous bâtissons l'avenir ensemble. Nous forgeons des alliances rentables et durables qui stimulent la croissance et maximisent les avantages mutuels pour tous les acteurs impliqués, des ligues aux artistes individuels.",
+                convictTitle1: "Défier le Cadre Externe",
+                convict1: "Nous exigeons un changement dans la façon dont la société perçoit à la fois l'athlète et l'artiste. Notre objectif est d'unifier la perception des deux en tant que maîtres de la forme, du rythme et de la discipline intellectuelle profonde.",
+                convictTitle2: "Briser la Limite Interne",
+                convict2: "Nous donnons aux athlètes les moyens de redéfinir leur propre identité. En mettant en évidence leurs compétences transférables, nous brisons les limites auto-imposées qui restreignent leur portée d'opportunités pendant et après leur carrière principale.",
+                convictTitle3: "Compléter la Salle",
+                convict3: "Nous sommes des bâtisseurs de réseaux stratégiques, identifiant et intégrant activement des acteurs clés—institutions, disciplines et modèles de financement—qui ne sont pas actuellement dans la salle mais qui sont essentiels pour une synergie durable à grande échelle.",
+                pillarTitle: "Nos Piliers de Synergie",
+                pillardesc: "Nous guidons nos partenaires et notre communauté à travers un parcours focalisé en trois étapes pour débloquer la croissance mutuelle et les connexions institutionnelles durables.",
+                p1Title: "Le Nexus Lab",
+                p1Desc: "Le Nexus Lab est notre division de leadership éclairé, dédiée à la recherche et à la définition des puissantes synergies entre la maîtrise artistique et la performance athlétique. Nous publions du contenu et des recherches d'experts pour établir le nouveau lexique professionnel de l'excellence intégrée.",
+                p2Title: "Programmes Transformateurs",
+                p2Desc: "Les Programmes Transformateurs offrent nos services de base évolutifs, y compris des ateliers spécialisés et des programmes conçus pour traduire la synergie conceptuelle en résultats mesurables et durables. Ces programmes prêts à déployer se concentrent sur l'amélioration de la résilience, du leadership et de la performance dans les deux domaines.",
+                p3Title: "Alliances Stratégiques",
+                p3Desc: "Le pilier Alliances Stratégiques est notre service de conseil à haute valeur ajoutée, agissant comme un courtier de confiance pour faire correspondre les grandes institutions des Arts et des Sports pour des initiatives co-marquées à fort impact. Nous structurons des partenariats qui alignent la mission et les ressources pour maximiser la valeur mutuelle et l'héritage social durable.",
                 contactPrompt: "Prêt à changer la donne ?",
                 contactCTA: "Parlons Possibilités",
                 footerLegal: "© 2024 Passerelles. Tous droits réservés. Créez la valeur. Franchissez le fossé."
