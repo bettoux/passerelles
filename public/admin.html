@@ -429,6 +429,67 @@
             link.click();
         }
 
+        // Import content from JSON file
+        function importContent(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const importData = JSON.parse(e.target.result);
+                    
+                    // Validate the data structure
+                    if (!importData.content || !importData.content.en || !importData.content.fr) {
+                        alert('Invalid backup file format!');
+                        return;
+                    }
+                    
+                    // Import content
+                    contentData.en = importData.content.en;
+                    contentData.fr = importData.content.fr;
+                    
+                    // Import speakers if available
+                    if (importData.speakers) {
+                        speakersData = importData.speakers;
+                    }
+                    
+                    // Save to localStorage
+                    localStorage.setItem('passerellesContent', JSON.stringify(contentData));
+                    if (importData.speakers) {
+                        localStorage.setItem('passerellesSpeakers', JSON.stringify(speakersData));
+                    }
+                    
+                    // Refresh the UI
+                    populateFields();
+                    renderSpeakersList();
+                    
+                    // Show success message
+                    const successMsg = document.getElementById('successMessage');
+                    successMsg.querySelector('span').textContent = 'Content imported successfully!';
+                    successMsg.classList.remove('hidden');
+                    setTimeout(() => {
+                        successMsg.classList.add('hidden');
+                        successMsg.querySelector('span').textContent = 'Changes saved successfully!';
+                    }, 3000);
+                    
+                    alert(`✅ Content imported successfully!\n\nImported from: ${importData.exportDate || 'Unknown date'}\n\nPlease click "Save All Changes" to ensure everything is saved.`);
+                } catch (error) {
+                    alert('❌ Error importing file: ' + error.message);
+                    console.error('Import error:', error);
+                }
+            };
+            
+            reader.onerror = function() {
+                alert('Error reading file!');
+            };
+            
+            reader.readAsText(file);
+            
+            // Reset the file input
+            event.target.value = '';
+        }
+
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', loadContent);
     </script>
