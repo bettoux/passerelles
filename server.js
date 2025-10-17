@@ -325,12 +325,21 @@ app.post('/api/save-content', (req, res) => {
 });*/
 
 // Initialize and start server
-Promise.all(/*[initializeDataFile(),*/ initializeContentFile()/*]*/).then(() => {
+/*Promise.all([initializeDataFile(), initializeContentFile()]).then(() => {
     app.listen(PORT, () => {
         console.log(`\n🚀 Server running on http://localhost:${PORT}`);
         console.log(`📋 Admin panel: http://localhost:${PORT}/admin.html`);
         console.log(`🌐 Public site: http://localhost:${PORT}/index.html`);
         console.log(`📁 Content file: ${path.resolve(CONTENT_FILE)}`);
         console.log(`📁 Speakers file: ${path.resolve(DATA_FILE)}\n`);
+    });
+});*/
+
+Promise.all(initializeContentFile()).then(() => {
+    app.listen(PORT, () => {
+        console.log(`\n🚀 Server running on http://localhost:${PORT}`);
+        console.log(`📋 Admin panel: http://localhost:${PORT}/admin.html`);
+        console.log(`🌐 Public site: http://localhost:${PORT}/index.html`);
+        console.log(`📁 Content file: ${path.resolve(CONTENT_FILE)}`);
     });
 });
