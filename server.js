@@ -335,7 +335,7 @@ app.post('/api/save-content', (req, res) => {
     });
 });*/
 
-Promise.all(initializeContentFile()).then(() => {
+Promise(initializeContentFile()).then(() => {
     app.listen(PORT, () => {
         console.log(`\n🚀 Server running on http://localhost:${PORT}`);
         console.log(`📋 Admin panel: http://localhost:${PORT}/admin.html`);
