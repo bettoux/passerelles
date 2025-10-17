@@ -43,11 +43,11 @@ const upload = multer({
     }
 });*/
 
-//const DATA_FILE = './data/speakers.json';
+const DATA_FILE = './data/speakers.json';
 const CONTENT_FILE = './data/content.json';
 
 // Initialize speakers data file
-/*async function initializeDataFile() {
+async function initializeDataFile() {
     try {
         await fs.mkdir('./data', { recursive: true });
         console.log('✅ Data directory created/verified');
@@ -77,7 +77,7 @@ const CONTENT_FILE = './data/content.json';
     } catch (err) {
         console.error('❌ Error initializing speakers file:', err);
     }
-}*/
+}
 
 // Initialize content file
 async function initializeContentFile() {
@@ -313,7 +313,7 @@ app.post('/api/save-content', (req, res) => {
 });*/
 
 // Upload image
-/*app.post('/api/upload', upload.single('image'), (req, res) => {
+app.post('/api/upload', upload.single('image'), (req, res) => {
     if (req.file) {
         res.json({ 
             url: `/uploads/${req.file.filename}`,
@@ -322,10 +322,10 @@ app.post('/api/save-content', (req, res) => {
     } else {
         res.status(400).json({ error: 'No file uploaded' });
     }
-});*/
+});
 
 // Initialize and start server
-/*Promise.all([initializeDataFile(), initializeContentFile()]).then(() => {
+Promise.all([initializeDataFile(), initializeContentFile()]).then(() => {
     app.listen(PORT, () => {
         console.log(`\n🚀 Server running on http://localhost:${PORT}`);
         console.log(`📋 Admin panel: http://localhost:${PORT}/admin.html`);
@@ -333,13 +333,5 @@ app.post('/api/save-content', (req, res) => {
         console.log(`📁 Content file: ${path.resolve(CONTENT_FILE)}`);
         console.log(`📁 Speakers file: ${path.resolve(DATA_FILE)}\n`);
     });
-});*/
-
-Promise(initializeContentFile()).then(() => {
-    app.listen(PORT, () => {
-        console.log(`\n🚀 Server running on http://localhost:${PORT}`);
-        console.log(`📋 Admin panel: http://localhost:${PORT}/admin.html`);
-        console.log(`🌐 Public site: http://localhost:${PORT}/index.html`);
-        console.log(`📁 Content file: ${path.resolve(CONTENT_FILE)}`);
-    });
 });
+
