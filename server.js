@@ -313,7 +313,7 @@ app.post('/api/save-content', (req, res) => {
 });*/
 
 // Upload image
-app.post('/api/upload', upload.single('image'), (req, res) => {
+/*app.post('/api/upload', upload.single('image'), (req, res) => {
     if (req.file) {
         res.json({ 
             url: `/uploads/${req.file.filename}`,
@@ -322,7 +322,7 @@ app.post('/api/upload', upload.single('image'), (req, res) => {
     } else {
         res.status(400).json({ error: 'No file uploaded' });
     }
-});
+});*/
 
 // Initialize and start server
 Promise.all([initializeDataFile(), initializeContentFile()]).then(() => {
