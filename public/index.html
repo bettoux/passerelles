@@ -306,7 +306,7 @@
     </script>-->
 
     <!--NEW Script-->
-    <script>
+    <!--<script>
     const content = {
         en: {
             navBrand: "Passerelles",
@@ -563,6 +563,277 @@ async function loadSavedContent() {
         
         console.log('✅ Page fully initialized');
     });
+</script>-->
+
+<!-- Another new script-->
+ <script>
+    const content = {
+        en: {
+            navBrand: "Passerelles",
+            navHome: "Home",
+            navPillars: "Pillars",
+            navContact: "Contact",
+            navCTA: "Let's Talk Possibilities",
+            langToggle: "FR",
+            heroSlogan: "Where Creativity Meets Competition.",
+            heroSubtext: "Unleashing the full potential of Art and Sport.",
+            visionTitle: "Why We Exist",
+            visionBody: "We're here to spark **unforgettable collaboration**. We unlock fresh audience engagement, build powerful new revenue streams, and cultivate sustainable careers by bringing the deliberate beauty of Art and the raw energy of Sport together.",
+            convictTitle1: "Challenge the External Frame",
+            convict1: "We demand a change in how society views both the athlete and the artist. Our goal is to unify the perception of both as masters of form, rhythm, and profound intellectual discipline.",
+            convictTitle2: "Break the Internal Limit",
+            convict2: "We empower athletes to redefine their own identity. By highlighting their transferable skills, we shatter the self-imposed limits that restrict their scope of opportunities during and after their primary career.",
+            convictTitle3: "Complete the Room",
+            convict3: "We are strategic network builders, actively identifying and integrating key players—institutions, disciplines, and funding models—that are not currently in the room but are essential for sustainable, large-scale synergy.",
+            pillarTitle: "Our Pillars of Synergy",
+            pillardesc: "We guide our partners and community through a focused, three-step journey to unlock mutual growth and sustainable institutional connections.",
+            p1Title: "The Nexus Lab",
+            p1Desc: "The Nexus Lab is our thought leadership division, dedicated to researching and defining the powerful synergies between artistic mastery and athletic performance. We publish expert content and research to establish the new professional lexicon for integrated excellence.",
+            p2Title: "Transformative Programs",
+            p2Desc: "Transformative Programs delivers our core, scalable services, including specialized workshops and curricula designed to translate conceptual synergy into measurable, durable results. These ready-to-deploy programs focus on enhancing resilience, leadership, and performance across both fields",
+            p3Title: "Strategic Alliances",
+            p3Desc: "The Strategic Alliances pillar is our high-value consulting service, acting as a trusted broker to match major Arts and Sports institutions for impactful, co-branded initiatives. We structure partnerships that align mission and resources to maximize mutual value and lasting social legacy.",
+            contactPrompt: "Ready to change the game?",
+            contactCTA: "Let's Talk Possibilities",
+            footerLegal: "© 2024 Passerelles. All Rights Reserved. Bridge the gap. Create the value."
+        },
+        fr: {
+            navBrand: "Passerelles",
+            navHome: "Accueil",
+            navPillars: "Piliers",
+            navContact: "Contact",
+            navCTA: "Parlons Possibilités",
+            langToggle: "EN",
+            heroSlogan: "Là où la Créativité rencontre la Compétition.",
+            heroSubtext: "Libérez le potentiel illimité de l'Art et du Sport.",
+            visionTitle: "Pourquoi Nous Existons",
+            visionBody: "Notre but est de déclencher des **collaborations inoubliables**. Nous générons un engagement renouvelé du public, créons de puissantes sources de revenus et favorisons le développement de carrières durables en unissant la beauté délibérée de l'Art et l'énergie brute du Sport.",
+            convictTitle1: "Défier le Cadre Externe",
+            convict1: "Nous exigeons un changement dans la façon dont la société perçoit à la fois l'athlète et l'artiste. Notre objectif est d'unifier la perception des deux en tant que maîtres de la forme, du rythme et de la discipline intellectuelle profonde.",
+            convictTitle2: "Briser la Limite Interne",
+            convict2: "Nous donnons aux athlètes les moyens de redéfinir leur propre identité. En mettant en évidence leurs compétences transférables, nous brisons les limites auto-imposées qui restreignent leur portée d'opportunités pendant et après leur carrière principale.",
+            convictTitle3: "Compléter la Salle",
+            convict3: "Nous sommes des bâtisseurs de réseaux stratégiques, identifiant et intégrant activement des acteurs clés—institutions, disciplines et modèles de financement—qui ne sont pas actuellement dans la salle mais qui sont essentiels pour une synergie durable à grande échelle.",
+            pillarTitle: "Nos Piliers de Synergie",
+            pillardesc: "Nous guidons nos partenaires et notre communauté à travers un parcours focalisé en trois étapes pour débloquer la croissance mutuelle et les connexions institutionnelles durables.",
+            p1Title: "Le Nexus Lab",
+            p1Desc: "Le Nexus Lab est notre division de leadership éclairé, dédiée à la recherche et à la définition des puissantes synergies entre la maîtrise artistique et la performance athlétique. Nous publions du contenu et des recherches d'experts pour établir le nouveau lexique professionnel de l'excellence intégrée.",
+            p2Title: "Programmes Transformateurs",
+            p2Desc: "Les Programmes Transformateurs offrent nos services de base évolutifs, y compris des ateliers spécialisés et des programmes conçus pour traduire la synergie conceptuelle en résultats mesurables et durables. Ces programmes prêts à déployer se concentrent sur l'amélioration de la résilience, du leadership et de la performance dans les deux domaines.",
+            p3Title: "Alliances Stratégiques",
+            p3Desc: "Le pilier Alliances Stratégiques est notre service de conseil à haute valeur ajoutée, agissant comme un courtier de confiance pour faire correspondre les grandes institutions des Arts et des Sports pour des initiatives co-marquées à fort impact. Nous structurons des partenariats qui alignent la mission et les ressources pour maximiser la valeur mutuelle et l'héritage social durable.",
+            contactPrompt: "Prêt à changer la donne ?",
+            contactCTA: "Parlons Possibilités",
+            footerLegal: "© 2024 Passerelles. Tous droits réservés. Créez la valeur. Franchissez le fossé."
+        }
+    };
+
+    let currentLang = 'en';
+
+    // Load content from server or localStorage
+    async function loadSavedContent() {
+        console.log('🔄 Loading content...');
+        try {
+            // Try to load from server first
+            const response = await fetch('/api/content');
+            console.log('📡 Server response status:', response.status);
+            
+            if (response.ok) {
+                const serverContent = await response.json();
+                console.log('📦 Server content received:', serverContent);
+                
+                // Merge server content with default content
+                if (serverContent.en) {
+                    Object.assign(content.en, serverContent.en);
+                    console.log('✅ English content loaded from server');
+                }
+                if (serverContent.fr) {
+                    Object.assign(content.fr, serverContent.fr);
+                    console.log('✅ French content loaded from server');
+                }
+                return true;
+            }
+        } catch (error) {
+            console.log('⚠️ Server not available:', error.message);
+        }
+        
+        // Fallback to localStorage
+        console.log('🔍 Checking localStorage...');
+        const savedContent = localStorage.getItem('passerellesContent');
+        if (savedContent) {
+            try {
+                const parsed = JSON.parse(savedContent);
+                if (parsed.en) {
+                    Object.assign(content.en, parsed.en);
+                    console.log('✅ English content loaded from localStorage');
+                }
+                if (parsed.fr) {
+                    Object.assign(content.fr, parsed.fr);
+                    console.log('✅ French content loaded from localStorage');
+                }
+                return true;
+            } catch (e) {
+                console.error('❌ Error loading saved content:', e);
+            }
+        } else {
+            console.log('ℹ️ No saved content found, using defaults');
+        }
+        return false;
+    }
+
+    function handleParallax() {
+        const parallaxLayer = document.getElementById('parallax-layer');
+        if (parallaxLayer) {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const scrollFactor = 0.5; 
+            const yPos = -scrollTop * scrollFactor;
+            parallaxLayer.style.transform = `translateY(${yPos}px)`;
+        }
+    }
+
+    function updateContent(lang) {
+        console.log(`🔄 Updating content to: ${lang}`);
+        const data = content[lang];
+        
+        // Update ALL elements with data-text attribute
+        const allTextElements = document.querySelectorAll('[data-text]');
+        console.log(`📝 Updating ${allTextElements.length} elements`);
+        
+        allTextElements.forEach(el => {
+            const key = el.getAttribute('data-text');
+            if (data[key]) {
+                let textContent = data[key];
+                
+                // Handle line breaks
+                if (textContent.includes('\\n')) {
+                    textContent = textContent.replace(/\\n/g, '<br>');
+                }
+                
+                // Handle bold text
+                if (textContent.includes('**')) {
+                    textContent = textContent.replace(/\*\*(.*?)\*\*/g, '<strong class="text-accent-mustard">$1</strong>');
+                }
+                
+                // Set content
+                if (textContent.includes('<')) {
+                    el.innerHTML = textContent;
+                } else {
+                    el.textContent = textContent;
+                }
+            }
+        });
+
+        // Force update buttons by ID
+        const buttons = [
+            { id: 'nav-cta', key: 'navCTA' },
+            { id: 'nav-cta-mobile', key: 'navCTA' },
+            { id: 'lang-toggle', key: 'langToggle' },
+            { id: 'lang-toggle-mobile', key: 'langToggle' }
+        ];
+        
+        buttons.forEach(({ id, key }) => {
+            const el = document.getElementById(id);
+            if (el && data[key]) {
+                el.textContent = data[key];
+            }
+        });
+        
+        document.documentElement.lang = lang;
+        console.log('✅ Content update complete');
+    }
+
+    function toggleLanguage() {
+        currentLang = currentLang === 'en' ? 'fr' : 'en';
+        console.log(`🌐 Language switched to: ${currentLang}`);
+        updateContent(currentLang);
+    }
+
+    function setupAnimations() {
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.2
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animated-item').forEach(item => {
+            observer.observe(item);
+        });
+    }
+
+    function toggleMobileMenu() {
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        hamburger.classList.toggle('active');
+        mobileMenu.classList.toggle('open');
+        
+        // Force update mobile menu content when opening
+        if (mobileMenu.classList.contains('open')) {
+            console.log('📱 Mobile menu opened, forcing content update');
+            setTimeout(() => updateContent(currentLang), 50);
+        }
+    }
+
+    function closeMobileMenu() {
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        hamburger.classList.remove('active');
+        mobileMenu.classList.remove('open');
+    }
+
+    // Initialize everything - MUST BE ASYNC
+    async function initializePage() {
+        console.log('🚀 Page initializing...');
+        
+        // Step 1: Load saved content (AWAIT this!)
+        await loadSavedContent();
+        
+        // Step 2: Set up event listeners
+        const langToggleDesktop = document.getElementById('lang-toggle');
+        const langToggleMobile = document.getElementById('lang-toggle-mobile');
+        const hamburger = document.getElementById('hamburger');
+        
+        if (langToggleDesktop) {
+            langToggleDesktop.addEventListener('click', toggleLanguage);
+        }
+        
+        if (langToggleMobile) {
+            langToggleMobile.addEventListener('click', () => {
+                toggleLanguage();
+                closeMobileMenu();
+            });
+        }
+        
+        if (hamburger) {
+            hamburger.addEventListener('click', toggleMobileMenu);
+        }
+        
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', closeMobileMenu);
+        });
+        
+        // Step 3: Apply content to ALL elements
+        updateContent(currentLang);
+        
+        // Step 4: Setup animations
+        setupAnimations();
+        handleParallax();
+        
+        console.log('✅ Page fully initialized');
+    }
+
+    // Call async initialization
+    document.addEventListener('DOMContentLoaded', initializePage);
 </script>
     
     <header class="sticky top-0 z-50 bg-primary-dark-bg shadow-lg shadow-black/50">
