@@ -13,7 +13,7 @@ app.use('/uploads', express.static('uploads'));
 app.use(express.json());
 
 // Configure multer for image uploads
-const storage = multer.diskStorage({
+/*const storage = multer.diskStorage({
     destination: async (req, file, cb) => {
         const dir = './uploads';
         try {
@@ -41,13 +41,13 @@ const upload = multer({
         }
         cb(new Error('Only image files are allowed!'));
     }
-});
+});*/
 
-const DATA_FILE = './data/speakers.json';
+//const DATA_FILE = './data/speakers.json';
 const CONTENT_FILE = './data/content.json';
 
 // Initialize speakers data file
-async function initializeDataFile() {
+/*async function initializeDataFile() {
     try {
         await fs.mkdir('./data', { recursive: true });
         console.log('✅ Data directory created/verified');
@@ -77,7 +77,7 @@ async function initializeDataFile() {
     } catch (err) {
         console.error('❌ Error initializing speakers file:', err);
     }
-}
+}*/
 
 // Initialize content file
 async function initializeContentFile() {
@@ -159,7 +159,7 @@ async function initializeContentFile() {
 }
 
 // Read speakers
-async function readSpeakers() {
+/*async function readSpeakers() {
     try {
         const data = await fs.readFile(DATA_FILE, 'utf8');
         return JSON.parse(data);
@@ -178,7 +178,7 @@ async function writeSpeakers(speakers) {
         console.error('Error writing speakers:', err);
         return false;
     }
-}
+}*/
 
 // Read content
 async function readContent() {
@@ -204,7 +204,7 @@ async function writeContent(content) {
 }
 
 // SPEAKERS API ROUTES
-app.get('/api/speakers', async (req, res) => {
+/*app.get('/api/speakers', async (req, res) => {
     const speakers = await readSpeakers();
     res.json(speakers);
 });
@@ -271,7 +271,7 @@ app.delete('/api/speakers/:id', async (req, res) => {
     } else {
         res.status(404).json({ error: 'Speaker not found' });
     }
-});
+});*/
 
 // CONTENT API ROUTES
 app.get('/api/content', async (req, res) => {
