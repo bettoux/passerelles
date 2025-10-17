@@ -13,7 +13,7 @@ app.use('/uploads', express.static('uploads'));
 app.use(express.json());
 
 // Configure multer for image uploads
-/*const storage = multer.diskStorage({
+const storage = multer.diskStorage({
     destination: async (req, file, cb) => {
         const dir = './uploads';
         try {
@@ -41,7 +41,7 @@ const upload = multer({
         }
         cb(new Error('Only image files are allowed!'));
     }
-});*/
+});
 
 const DATA_FILE = './data/speakers.json';
 const CONTENT_FILE = './data/content.json';
