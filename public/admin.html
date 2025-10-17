@@ -405,6 +405,18 @@
             
             // Save to localStorage
             localStorage.setItem('passerellesContent', JSON.stringify(contentData));
+
+            // Save to serverStorage
+            fetch('/api/save-content', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(contentData)
+            })
+            .then(response => response.json())
+            .then(data => console.log('Server response:', data))
+            .catch(error => console.error('Error saving content:', error));
             
             // Show success message
             const successMsg = document.getElementById('successMessage');
