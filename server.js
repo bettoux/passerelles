@@ -10,6 +10,7 @@ const PORT = 3001;
 app.use(express.json({ limit: '50mb' }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static('uploads'));
+app.use(express.json());
 
 // Configure multer for image uploads
 const storage = multer.diskStorage({
@@ -285,7 +286,19 @@ app.get('/api/content', async (req, res) => {
     }
 });
 
-app.put('/api/content', async (req, res) => {
+// Update content
+app.post('/api/save-content', (req, res) => {
+    const newContent = req.body;
+    fs.writeFile('./data/content.json', JSON.stringify(newContent, null, 2), (err) => {
+        if (err) {
+            console.error('Error writing file:', err);
+            return res.status(500).json({ message: 'Failed to save content' });
+        }
+        res.json({ message: 'Content saved successfully' });
+    });
+});
+
+/*app.put('/api/content', async (req, res) => {
     console.log('📡 PUT /api/content request received');
     console.log('📦 Request body keys:', Object.keys(req.body));
     
@@ -297,7 +310,7 @@ app.put('/api/content', async (req, res) => {
         console.error('❌ Content update failed');
         res.status(500).json({ error: 'Failed to update content' });
     }
-});
+});*/
 
 // Upload image
 app.post('/api/upload', upload.single('image'), (req, res) => {
